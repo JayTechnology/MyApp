@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+</head>
+<body>
+    <div data-ng-controller="helpCtrl">
+
+        <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
+
+        <form name="helpForm" novalidate role="form" data-ng-submit="submit(helpForm)" novalidaion>
+
+            <div class="form-group">
+                <label for="name">Your Name </label>
+                <span class="label label-danger" data-ng-show="helpForm.name.$dirty && helpForm.name.$error.required">Required!</span>
+                <span class="label label-danger" data-ng-show="helpForm.name.$dirty && helpForm.name.$error.minlength">Too Short!</span>
+                <input type="text" name="name" data-ng-model="name" class="form-control" data-ng-minlength="2" required />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Your E-mail address</label>
+                <span class="label label-danger" data-ng-show="helpForm.email.$dirty && helpForm.email.$error.required">Required!</span>
+                <span class="label label-danger" data-ng-show="helpForm.email.$dirty && helpForm.email.$error.email">Invalid email!</span>
+                <span class="label label-danger" data-ng-show="helpForm.email.$dirty && helpForm.email.$error.noDogs">No Doge!</span>
+                <input type="email" name="email" data-ng-model="email" class="form-control" required no-dogs />
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country</label>
+                <span class="label label-danger" data-ng-show="helpForm.country.$dirty && helpForm.country.$error.required">Required!</span>
+                <select name="country" data-ng-model="country" data-ng-options="country.code as country.name for country in countryListOptions track by country.code" class="form-control" required>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="url">URL of Relevant Page</label>
+                <span class="label label-danger" data-ng-show="helpForm.url.$dirty && helpForm.url.$error.required">Required!</span>
+                <span class="label label-danger" data-ng-show="helpForm.url.$dirty && helpForm.url.$error.url">Invalid URL format!</span>
+                <input type="url" name="url" data-ng-model="url" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Description</label>
+                <span class="label label-danger" data-ng-show="helpForm.comments.$dirty && helpForm.comments.$error.required">Required!</span>
+                <textarea name="comments" data-ng-model="comments" class="form-control" required></textarea>
+            </div>
+
+            <button data-ng-disabled="helpForm.$invalid" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
